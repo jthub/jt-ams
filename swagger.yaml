@@ -86,6 +86,42 @@ paths:
           description: Account was deleted
         404:
           description: Account does not exist
+  /accounts/{account_name}/members/{member_id}:
+    get:
+      operationId: app.get_member
+      summary: Get a member from an oragnization account
+      parameters:
+        - $ref: '#/parameters/account_name'
+        - $ref: '#/parameters/member_id'
+      responses:
+        200:
+          description: Return member name and ID
+        404:
+          description: Member does not exist
+    put:
+      operationId: app.add_member
+      summary: Add a member to an oragnization account
+      parameters:
+        - $ref: '#/parameters/account_name'
+        - $ref: '#/parameters/member_id'
+      responses:
+        200:
+          description: Return member name and ID when member added
+        204:
+          description: Member already in the organization
+        404:
+          description: Member does not exist
+    delete:
+      operationId: app.delete_member
+      summary: Add a member to an oragnization account
+      parameters:
+        - $ref: '#/parameters/account_name'
+        - $ref: '#/parameters/member_id'
+      responses:
+        204:
+          description: Member deleted from the organization
+        404:
+          description: Member does not exist
 
 
 parameters:
@@ -102,6 +138,13 @@ parameters:
     in: query
     type: string
     required: false
+    pattern: "^[a-zA-Z0-9-_]+$"
+  member_id:
+    name: member_id
+    description: Member's account ID
+    in: path
+    type: string
+    required: true
     pattern: "^[a-zA-Z0-9-_]+$"
 
 

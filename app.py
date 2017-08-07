@@ -32,6 +32,18 @@ def delete_account(account_id):
     pass
 
 
+def get_member(account_name, member_id):
+    pass
+
+
+def add_member(account_name, member_id):
+    pass
+
+
+def delete_member(account_name, member_id):
+    pass
+
+
 logging.basicConfig(level=logging.INFO)
 app = connexion.App(__name__)
 app.add_api('swagger.yaml', base_path='/v0.1')

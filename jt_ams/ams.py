@@ -81,5 +81,9 @@ def add_member():
     pass
 
 
+def get_member():
+    pass
+
+
 def delete_member():
     pass
