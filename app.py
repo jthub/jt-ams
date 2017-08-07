@@ -16,7 +16,10 @@ def get_account(account_name):
     return account or ('Not found', 404)
 
 
-def create_account(account_name, account_type='org'):
+def create_account(account):
+    account_name = account.get('_name')
+    account_type = account.get('account_type') or 'org'
+
     exists = jt_ams.get_account(account_name)
     if exists:
         return NoContent, 409
