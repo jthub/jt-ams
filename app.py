@@ -34,7 +34,7 @@ def delete_account(account_id):
 
 logging.basicConfig(level=logging.INFO)
 app = connexion.App(__name__)
-app.add_api('swagger.yaml')
+app.add_api('swagger.yaml', base_path='/v0.1')
 # set the WSGI application callable to allow using uWSGI:
 # uwsgi --http :8080 -w app
 application = app.app
