@@ -88,6 +88,7 @@ paths:
           description: Account does not exist
   /accounts/{account_name}/members/{member_id}:
     get:
+      tags: [Organization account members]
       operationId: app.get_member
       summary: Get a member from an oragnization account
       parameters:
@@ -99,6 +100,7 @@ paths:
         404:
           description: Member does not exist
     put:
+      tags: [Organization account members]
       operationId: app.add_member
       summary: Add a member to an oragnization account
       parameters:
@@ -112,6 +114,7 @@ paths:
         404:
           description: Member does not exist
     delete:
+      tags: [Organization account members]
       operationId: app.delete_member
       summary: Add a member to an oragnization account
       parameters:

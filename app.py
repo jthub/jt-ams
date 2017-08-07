@@ -7,7 +7,7 @@ import jt_ams
 from connexion import NoContent
 
 
-def get_accounts(offset, size, account_type=None):
+def get_accounts(offset, limit, account_type=None):
     return []
 
 
@@ -46,7 +46,7 @@ def delete_member(account_name, member_id):
 
 logging.basicConfig(level=logging.INFO)
 app = connexion.App(__name__)
-app.add_api('swagger.yaml', base_path='/v0.1')
+app.add_api('swagger.yaml', base_path='/api/jt-ams/v0.1')
 # set the WSGI application callable to allow using uWSGI:
 # uwsgi --http :8080 -w app
 application = app.app
