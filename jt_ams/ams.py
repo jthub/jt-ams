@@ -4,7 +4,9 @@ import uuid
 # settings, need to move out to config
 
 AMS_ETCD_ROOT = '/jthub:ams'
-ACCOUNT_PREFIX = 'account@accounts'
+ACCOUNT_PREFIX = 'account'
+ACCOUNT_MK = '_name'  # main key field for account
+ACCOUNT_PK = '_id'
 
 etcd_client = etcd3.client()
 
@@ -14,7 +16,8 @@ def get_accounts(account_name):
 
 
 def get_account(account_name):
-    key = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % ('_name', account_name)])
+    # get primary ID from account name
+    key = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % (ACCOUNT_MK, account_name)])
     r = etcd_client.get(key)
 
     try:
@@ -26,7 +29,7 @@ def get_account(account_name):
         '_id': _id
     }
 
-    key_prefix = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, 'data', '%s:%s/' % ('_id', _id)])
+    key_prefix = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s/' % (ACCOUNT_PK, _id)])
     r = etcd_client.get_prefix(key_prefix=key_prefix, sort_target='KEY')
 
     for value, meta in r:
@@ -53,18 +56,18 @@ def get_account(account_name):
 
 
 def create_account(account_name, account_type):
-    _id = str(uuid.uuid4())
+    _id = str(uuid.uuid4())  # generate random UUID as primary ID
 
-    key = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % ('_name', account_name)])
+    key = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % (ACCOUNT_MK, account_name)])
     r = etcd_client.put(key, _id)
 
-    key_prefix = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, 'data', '%s:%s' % ('_id', _id)])
-    r = etcd_client.put('%s/_name' % key_prefix, account_name)
+    key_prefix = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % (ACCOUNT_PK, _id)])
+    r = etcd_client.put('%s/%s:%s' % (key_prefix, ACCOUNT_MK, account_name), '')
 
     if account_type == 'org':
-        r = etcd_client.put('%s/is_org' % key_prefix, '1')
+        r = etcd_client.put('%s/is_org:1' % key_prefix, '')
     else:
-        r = etcd_client.put('%s/is_org' % key_prefix, '')
+        r = etcd_client.put('%s/is_org:0' % key_prefix, '')
 
     return get_account(account_name)
 
