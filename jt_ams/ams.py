@@ -5,8 +5,8 @@ import uuid
 
 AMS_ETCD_ROOT = '/jthub:ams'
 ACCOUNT_PREFIX = 'account'
-ACCOUNT_MK = '_name'  # main key field for account
-ACCOUNT_PK = '_id'
+ACCOUNT_MK = 'name'  # main key field for account
+ACCOUNT_PK = 'id'
 
 etcd_client = etcd3.client()
 
@@ -21,15 +21,15 @@ def get_account(account_name):
     r = etcd_client.get(key)
 
     try:
-        _id = r[0].decode("utf-8")
+        id = r[0].decode("utf-8")
     except:
         return
 
     account = {
-        '_id': _id
+        'id': id
     }
 
-    key_prefix = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s/' % (ACCOUNT_PK, _id)])
+    key_prefix = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s/' % (ACCOUNT_PK, id)])
     r = etcd_client.get_prefix(key_prefix=key_prefix, sort_target='KEY')
 
     for value, meta in r:
@@ -56,12 +56,12 @@ def get_account(account_name):
 
 
 def create_account(account_name, account_type):
-    _id = str(uuid.uuid4())  # generate random UUID as primary ID
+    id = str(uuid.uuid4())  # generate random UUID as primary ID
 
     key = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % (ACCOUNT_MK, account_name)])
-    r = etcd_client.put(key, _id)
+    r = etcd_client.put(key, id)
 
-    key_prefix = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % (ACCOUNT_PK, _id)])
+    key_prefix = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % (ACCOUNT_PK, id)])
     r = etcd_client.put('%s/%s:%s' % (key_prefix, ACCOUNT_MK, account_name), '')
 
     if account_type == 'org':

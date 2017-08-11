@@ -151,9 +151,9 @@ definitions:
   Account:
     type: object
     required:
-      - _name
+      - name
     properties:
-      _name:
+      name:
         type: string
         description: Account's name
         pattern: "^[a-zA-Z0-9-_]{3,30}$"
