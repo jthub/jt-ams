@@ -11,6 +11,18 @@ security:
   # (only active if the TOKENINFO_URL environment variable is set)
   - oauth2: [uid]
 paths:
+  /accounts/account_id/{account_id}:
+    get:
+      tags: [Accounts]
+      operationId: app.get_account_by_id
+      summary: Get account by unique ID
+      parameters:
+        - $ref: '#/parameters/account_id'
+      responses:
+        200:
+          description: Return account
+          schema:
+            type: array
   /accounts:
     get:
       tags: [Accounts]
@@ -32,8 +44,6 @@ paths:
           description: Return accounts
           schema:
             type: array
-            #items:
-            #  $ref: '#/definitions/Account'
     post:
       tags: [Accounts]
       operationId: app.create_account
@@ -138,6 +148,13 @@ parameters:
     type: string
     required: true
     pattern: "^[a-zA-Z0-9-_]{3,30}$"
+  account_id:
+    name: account_id
+    description: Account's unique ID
+    in: path
+    type: string
+    required: true
+    pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
   member_name:
     name: member_name
     description: Member's account nanme

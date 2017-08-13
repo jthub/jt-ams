@@ -12,8 +12,11 @@ def get_accounts(limit, offset):
 
 
 def get_account(account_name):
-    account = jt_ams.get_account(account_name)
-    return account or ('Not found', 404)
+    return jt_ams.get_account(account_name) or ('Not found', 404)
+
+
+def get_account_by_id(account_id):
+    return jt_ams.get_account_by_id(account_id) or ('Not found', 404)
 
 
 def create_account(account):

@@ -15,21 +15,12 @@ def get_accounts(account_name):
     pass
 
 
-def get_account(account_name):
-    # get primary ID from account name
-    key = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % (ACCOUNT_MK, account_name)])
-    r = etcd_client.get(key)
-
-    try:
-        id = r[0].decode("utf-8")
-    except:
-        return
-
+def get_account_by_id(account_id):
     account = {
-        'id': id
+        'id': account_id
     }
 
-    key_prefix = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s/' % (ACCOUNT_PK, id)])
+    key_prefix = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s/' % (ACCOUNT_PK, account_id)])
     r = etcd_client.get_prefix(key_prefix=key_prefix, sort_target='KEY')
 
     for value, meta in r:
@@ -49,19 +40,34 @@ def get_account(account_name):
             account[k] = v
         else:
             sub_key, sub_type = k.split('@', 1)
-            if not sub_type in account: account[sub_type] = []
+            if sub_type not in account:
+                account[sub_type] = []
             account[sub_type].append({sub_key: v})
 
-    return account
+    if account.get('name'): # account must have 'name'
+        return account
+
+
+def get_account(account_name):
+    # get primary ID from account name
+    key = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % (ACCOUNT_MK, account_name)])
+    r = etcd_client.get(key)
+
+    try:
+        account_id = r[0].decode("utf-8")
+    except:
+        return
+
+    return get_account_by_id(account_id)
 
 
 def create_account(account_name, account_type):
-    id = str(uuid.uuid4())  # generate random UUID as primary ID
+    account_id = str(uuid.uuid4())  # generate random UUID as primary ID
 
     key = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % (ACCOUNT_MK, account_name)])
     r = etcd_client.put(key, id)
 
-    key_prefix = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % (ACCOUNT_PK, id)])
+    key_prefix = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % (ACCOUNT_PK, account_id)])
     r = etcd_client.put('%s/%s:%s' % (key_prefix, ACCOUNT_MK, account_name), '')
 
     if account_type == 'org':
