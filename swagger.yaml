@@ -11,7 +11,7 @@ security:
   # (only active if the TOKENINFO_URL environment variable is set)
   - oauth2: [uid]
 paths:
-  /accounts/account_id/{account_id}:
+  /accounts/_account_id/{account_id}:
     get:
       tags: [Accounts]
       operationId: app.get_account_by_id
@@ -99,7 +99,7 @@ paths:
           description: Account was deleted
         404:
           description: Account does not exist
-  /accounts/{account_name}/members/{member_name}:
+  /accounts/{account_name}/_members/{member_name}:
     get:
       tags: [Organization account members]
       operationId: app.get_member
@@ -147,7 +147,7 @@ parameters:
     in: path
     type: string
     required: true
-    pattern: "^[a-zA-Z0-9-_]{3,30}$"
+    pattern: "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,31}$"
   account_id:
     name: account_id
     description: Account's unique ID
@@ -161,7 +161,7 @@ parameters:
     in: path
     type: string
     required: true
-    pattern: "^[a-zA-Z0-9-_]{3,30}$"
+    pattern: "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,31}$"
 
 
 definitions:
@@ -173,7 +173,7 @@ definitions:
       name:
         type: string
         description: Account's name
-        pattern: "^[a-zA-Z0-9-_]{3,30}$"
+        pattern: "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,31}$"
         example: "junjun-zhang"
         minLength: 3
         maxLength: 30
