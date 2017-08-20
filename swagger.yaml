@@ -11,7 +11,7 @@ security:
   # (only active if the TOKENINFO_URL environment variable is set)
   - oauth2: [uid]
 paths:
-  /accounts/_account_id/{account_id}:
+  /accounts/_id/{account_id}:
     get:
       tags: [Accounts]
       operationId: app.get_account_by_id
