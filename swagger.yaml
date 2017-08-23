@@ -11,6 +11,49 @@ security:
   # (only active if the TOKENINFO_URL environment variable is set)
   - oauth2: [uid]
 paths:
+# TODO: new endpoints
+#  /users:
+#    get:
+#    post:
+#  /users/{user_name}:
+#    get:
+#    put:
+#    delete:
+#  /users/{user_name}/orgs:
+#    get:
+#  /orgs:
+#    get:
+#    post:
+#  /orgs/{org_name}:
+#    get:
+#    put:
+#    delete:
+#  /orgs/{org_name}/owners:
+#    get:
+#    post:
+#  /orgs/{org_name}/owners/{user_name}:
+#    get:
+#    delete:
+#  /orgs/{org_name}/members:
+#    get:
+#    post:
+#  /orgs/{org_name}/members/{user_name}:
+#    get:
+#    delete:
+#  /orgs/{org_name}/collaborators:
+#    get:
+#    post:
+#  /orgs/{org_name}/collaborators/{user_name}:
+#    get:
+#    delete:
+#  /orgs/{org_name}/teams/{team_name}/members:
+#    get:
+#    post:
+#  /orgs/{org_name}/teams/{team_name}/members/{user_name}:
+#    get:
+#    put:  # edit role etc, could be
+#    delete:
+
   /accounts/_id/{account_id}:
     get:
       tags: [Accounts]
