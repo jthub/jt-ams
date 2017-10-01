@@ -65,7 +65,7 @@ def create_account(account_name, account_type):
     account_id = str(uuid.uuid4())  # generate random UUID as primary ID
 
     key = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % (ACCOUNT_MK, account_name)])
-    r = etcd_client.put(key, id)
+    r = etcd_client.put(key, account_id)
 
     key_prefix = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % (ACCOUNT_PK, account_id)])
     r = etcd_client.put('%s/%s:%s' % (key_prefix, ACCOUNT_MK, account_name), '')

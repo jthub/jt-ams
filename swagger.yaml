@@ -1,15 +1,15 @@
 swagger: '2.0'
 info:
-  title: JTHub Account Management Service API
+  title: JTHub Account Management Service API (primilinary, subject to changes)
   version: "0.1"
 consumes:
   - application/json
 produces:
   - application/json
-security:
+#security:
   # enable OAuth protection for all REST endpoints
   # (only active if the TOKENINFO_URL environment variable is set)
-  - oauth2: [uid]
+#  - oauth2: [uid]
 paths:
 # TODO: new endpoints
 #  /users:
@@ -65,12 +65,12 @@ paths:
         200:
           description: Return account
           schema:
-            type: array
+            $ref: '#/definitions/Account'
   /accounts:
     get:
       tags: [Accounts]
       operationId: app.get_accounts
-      summary: Get all accounts
+      summary: Get all accounts (not implemented yet)
       parameters:
         - name: limit
           in: query
@@ -93,7 +93,7 @@ paths:
       summary: Create an account
       parameters:
         - name: account
-          description: Account is an organization or individual
+          description: Account type is an organization (org) or individual (user)
           in: body
           schema:
             $ref: '#/definitions/Account'
@@ -121,7 +121,7 @@ paths:
     put:
       tags: [Accounts]
       operationId: app.update_account
-      summary: Update an account
+      summary: Update an account (not implemented yet)
       parameters:
         - $ref: '#/parameters/account_name'
         - name: account
@@ -134,7 +134,7 @@ paths:
     delete:
       tags: [Accounts]
       operationId: app.delete_account
-      summary: Remove an account
+      summary: Remove an account (not implemented yet)
       parameters:
         - $ref: '#/parameters/account_name'
       responses:
@@ -146,7 +146,7 @@ paths:
     get:
       tags: [Organizations]
       operationId: app.get_member
-      summary: Verify oragnization membership on a given member account
+      summary: Verify oragnization membership on a given member account (not implemented yet)
       parameters:
         - $ref: '#/parameters/account_name'
         - $ref: '#/parameters/member_name'
@@ -158,7 +158,7 @@ paths:
     put:
       tags: [Organizations]
       operationId: app.add_member
-      summary: Add a member to an oragnization account
+      summary: Add a member to an oragnization account (not implemented yet)
       parameters:
         - $ref: '#/parameters/account_name'
         - $ref: '#/parameters/member_name'
@@ -172,7 +172,7 @@ paths:
     delete:
       tags: [Organizations]
       operationId: app.delete_member
-      summary: Remove a member from an oragnization account
+      summary: Remove a member from an oragnization account (not implemented yet)
       parameters:
         - $ref: '#/parameters/account_name'
         - $ref: '#/parameters/member_name'
@@ -220,6 +220,10 @@ definitions:
         example: "junjun-zhang"
         minLength: 3
         maxLength: 30
+      account_type:
+        type: string
+        description: Account type
+        enum: ["org", "user"]
       tags:
         type: object
         description: Custom tags

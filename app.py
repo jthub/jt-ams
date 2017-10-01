@@ -20,12 +20,12 @@ def get_account_by_id(account_id):
 
 
 def create_account(account):
-    account_name = account.get('_name')
+    account_name = account.get('name')
     account_type = account.get('account_type') or 'org'
 
     exists = jt_ams.get_account(account_name)
     if exists:
-        return NoContent, 409
+        return "Account name already exists", 409
     else:
         return jt_ams.create_account(account_name, account_type)
 
