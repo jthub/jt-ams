@@ -223,10 +223,7 @@ definitions:
       account_type:
         type: string
         description: Account type
-        enum: ["org", "user"]
-      tags:
-        type: object
-        description: Custom tags
+        enum: ["user", "org"]
 
 
 securityDefinitions:
