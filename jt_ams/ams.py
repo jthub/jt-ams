@@ -3,7 +3,7 @@ import uuid
 
 # settings, need to move out to config
 
-AMS_ETCD_ROOT = '/jthub:ams'
+AMS_ETCD_ROOT = '/jt:ams'
 ACCOUNT_PREFIX = 'account'
 ACCOUNT_MK = 'name'  # main key field for account
 ACCOUNT_PK = 'id'
