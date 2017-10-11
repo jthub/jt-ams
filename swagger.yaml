@@ -67,26 +67,26 @@ paths:
           schema:
             $ref: '#/definitions/Account'
   /accounts:
-    get:
-      tags: [Accounts]
-      operationId: app.get_accounts
-      summary: Get all accounts (not implemented yet)
-      parameters:
-        - name: limit
-          in: query
-          type: integer
-          minimum: 0
-          default: 100
-        - name: offset
-          in: query
-          type: integer
-          minimum: 0
-          default: 0
-      responses:
-        200:
-          description: Return accounts
-          schema:
-            type: array
+  #  get:
+  #    tags: [Accounts]
+  #    operationId: app.get_accounts
+  #    summary: Get all accounts (not implemented yet)
+  #    parameters:
+  #      - name: limit
+  #        in: query
+  #        type: integer
+  #        minimum: 0
+  #        default: 100
+  #      - name: offset
+  #        in: query
+  #        type: integer
+  #        minimum: 0
+  #        default: 0
+  #    responses:
+  #      200:
+  #        description: Return accounts
+  #        schema:
+  #          type: array
     post:
       tags: [Accounts]
       operationId: app.create_account
