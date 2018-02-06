@@ -61,7 +61,7 @@ def get_account(account_name):
     return get_account_by_id(account_id)
 
 
-def create_account(account_name, account_type):
+def create_account(account_name, account_type='org'):
     account_id = str(uuid.uuid4())  # generate random UUID as primary ID
 
     key = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s' % (ACCOUNT_MK, account_name)])

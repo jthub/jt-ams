@@ -57,7 +57,7 @@ paths:
   /accounts/_id/{account_id}:
     get:
       tags: [Accounts]
-      operationId: app.get_account_by_id
+      operationId: jt_ams.get_account_by_id
       summary: Get account by unique ID
       parameters:
         - $ref: '#/parameters/account_id'
@@ -89,7 +89,7 @@ paths:
   #          type: array
     post:
       tags: [Accounts]
-      operationId: app.create_account
+      operationId: jt_ams.create_account
       summary: Create an account
       parameters:
         - name: account
@@ -107,7 +107,7 @@ paths:
   /accounts/{account_name}:
     get:
       tags: [Accounts]
-      operationId: app.get_account
+      operationId: jt_ams.get_account
       summary: Get a single account
       parameters:
         - $ref: '#/parameters/account_name'
@@ -120,7 +120,7 @@ paths:
           description: Account does not exist
     put:
       tags: [Accounts]
-      operationId: app.update_account
+      operationId: jt_ams.update_account
       summary: Update an account (not implemented yet)
       parameters:
         - $ref: '#/parameters/account_name'
@@ -133,7 +133,7 @@ paths:
           description: Account updated
     delete:
       tags: [Accounts]
-      operationId: app.delete_account
+      operationId: jt_ams.delete_account
       summary: Remove an account (not implemented yet)
       parameters:
         - $ref: '#/parameters/account_name'
@@ -145,7 +145,7 @@ paths:
   /accounts/{account_name}/_members/{member_name}:
     get:
       tags: [Organizations]
-      operationId: app.get_member
+      operationId: jt_ams.get_member
       summary: Verify oragnization membership on a given member account (not implemented yet)
       parameters:
         - $ref: '#/parameters/account_name'
@@ -157,7 +157,7 @@ paths:
           description: Member does not exist
     put:
       tags: [Organizations]
-      operationId: app.add_member
+      operationId: jt_ams.add_member
       summary: Add a member to an oragnization account (not implemented yet)
       parameters:
         - $ref: '#/parameters/account_name'
@@ -171,7 +171,7 @@ paths:
           description: Member does not exist
     delete:
       tags: [Organizations]
-      operationId: app.delete_member
+      operationId: jt_ams.delete_member
       summary: Remove a member from an oragnization account (not implemented yet)
       parameters:
         - $ref: '#/parameters/account_name'
