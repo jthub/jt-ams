@@ -1,5 +1,6 @@
 import etcd3
 import uuid
+import os
 
 # settings, need to move out to config
 
@@ -8,7 +9,10 @@ ACCOUNT_PREFIX = 'account'
 ACCOUNT_MK = 'name'  # main key field for account
 ACCOUNT_PK = 'id'
 
-etcd_client = etcd3.client()
+etcd_host = os.environ['ETCD_HOST'] if os.environ.get('ETCD_HOST') else 'localhost'
+etcd_port = os.environ['ETCD_PORT'] if os.environ.get('ETCD_PORT') else 2379
+
+etcd_client = etcd3.client(host=etcd_host, port=etcd_port)
 
 
 def get_accounts(account_name):
