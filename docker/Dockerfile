@@ -14,10 +14,10 @@ RUN apt-get -yqq update && \
     apt-get -yqq install curl
 
 RUN curl -sSL -o tmp.tar.gz --retry 10 https://github.com/jthub/jt-ams/archive/0.2.0a6.tar.gz && \
-    mkdir -p /opt/jt-ams && \
-    tar -C /opt/jt-ams --strip-components 1 -zxf tmp.tar.gz && \
+    mkdir -p /srv/jt-ams && \
+    tar -C /srv/jt-ams --strip-components 1 -zxf tmp.tar.gz && \
     apt-get -yqq install python3-pip && \
     pip3 install --upgrade pip  && \
-    pip3 install -r /opt/jt-ams/requirements.txt
+    pip3 install -r /srv/jt-ams/requirements.txt
 
-CMD ["/usr/bin/python3", "/opt/jt-ams/app.py"]
+CMD ["python3", "/srv/jt-ams/app.py"]
