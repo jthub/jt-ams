@@ -17,7 +17,6 @@ RUN curl -sSL -o tmp.tar.gz --retry 10 https://github.com/jtracker-io/jt-ams/arc
     mkdir -p /srv/jt-ams && \
     tar -C /srv/jt-ams --strip-components 1 -zxf tmp.tar.gz && \
     apt-get -yqq install python3-pip && \
-    pip3 install --upgrade pip  && \
     pip3 install -r /srv/jt-ams/requirements.txt
 
 CMD ["python3", "/srv/jt-ams/app.py"]
