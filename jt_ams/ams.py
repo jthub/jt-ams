@@ -25,7 +25,7 @@ def get_account_by_id(account_id):
     }
 
     key_prefix = '/'.join([AMS_ETCD_ROOT, ACCOUNT_PREFIX, '%s:%s/' % (ACCOUNT_PK, account_id)])
-    r = etcd_client.get_prefix(key_prefix=key_prefix, sort_target='KEY')
+    r = etcd_client.get_prefix(key_prefix=key_prefix, sort_target='mod')
 
     for value, meta in r:
         k = meta.key.decode('utf-8').replace(key_prefix, '', 1)
