@@ -85,8 +85,6 @@ paths:
   #    responses:
   #      200:
   #        description: Return accounts
-  #        schema:
-  #          type: array
     post:
       tags: [Accounts]
       operationId: jt_ams.create_account
