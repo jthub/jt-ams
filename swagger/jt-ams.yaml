@@ -188,7 +188,7 @@ parameters:
     in: path
     type: string
     required: true
-    pattern: "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,31}$"
+    pattern: "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,63}$"
   account_id:
     name: account_id
     description: Account's unique ID
@@ -202,7 +202,7 @@ parameters:
     in: path
     type: string
     required: true
-    pattern: "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,31}$"
+    pattern: "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,63}$"
 
 
 definitions:
@@ -214,7 +214,7 @@ definitions:
       name:
         type: string
         description: Account's name
-        pattern: "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,31}$"
+        pattern: "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,63}$"
         example: "junjun-zhang"
         minLength: 3
         maxLength: 30
